@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using IO = System.IO;
+using KSP.UI.Screens;
 
 namespace ippo
 {

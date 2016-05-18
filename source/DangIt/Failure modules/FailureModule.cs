@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Experience;
+using KSP.UI.Screens;
 
 namespace ippo
 {
@@ -768,9 +769,15 @@ namespace ippo
         /// <summary>
         /// Reduces the value of the part when it is recovered.
         /// </summary>
-        public float GetModuleCost(float defaultCost)
+
+        public float GetModuleCost(float defaultCost, ModifierStagingSituation sit)
         {
             return (this.ExponentialDecay() - 1) * defaultCost;
+        }
+
+        public ModifierChangeWhen GetModuleCostChangeWhen()
+        {
+            return ModifierChangeWhen.FIXED;
         }
 
 		[KSPEvent(guiActive = false, active = false, guiName="Mute Alarm")]

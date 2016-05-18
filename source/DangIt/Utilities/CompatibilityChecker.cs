@@ -181,7 +181,7 @@ namespace ippo
 
             if ((incompatible.Length > 0) || (incompatibleUnity.Length > 0) || IsWin64())
             {
-                PopupDialog.SpawnPopupDialog("Compatibility Checker", message, "OK", true, HighLogic.Skin);
+                PopupDialog.SpawnPopupDialog(new UnityEngine.Vector2(0, 0), new UnityEngine.Vector2(100, 100), "Compatibility Checker", message, "OK", true, HighLogic.UISkin);
             }
         }
 

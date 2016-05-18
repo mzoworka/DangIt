@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using KSP.IO;
+using KSP.UI.Screens;
 
 namespace ippo
 {
@@ -54,14 +55,15 @@ namespace ippo
             StringBuilder sb = new StringBuilder();
 
             sb.Append("[");
-
+/*
             if (FlightLogger.met_years > 0) sb.Append(FlightLogger.met_years.ToString(fmt) + ":");
             if (FlightLogger.met_days > 0) sb.Append(FlightLogger.met_days.ToString(fmt) + ":");
 
             sb.Append(FlightLogger.met_hours.ToString(fmt) + ":" +
                       FlightLogger.met_mins.ToString(fmt) + ":" +
                       FlightLogger.met_secs.ToString(fmt));
-
+            */
+            sb.Append(FlightLogger.met.ToString());
 			sb.Append("]: ");
 
             FlightLogger.eventLog.Add(sb.ToString() + msg);

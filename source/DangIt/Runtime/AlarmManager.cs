@@ -15,11 +15,11 @@ namespace ippo
 		{
 			print("[DangIt] [AlarmManager] Starting...");
 			print("[DangIt] [AlarmManager] Setting Volume...");
-			this.audio.panLevel = 0f; //This disable the game scaling volume with distance from source
-			this.audio.volume = 1f;
-
+            //this.GetComponent<AudioSource>().panLevel = 0f; //This disable the game scaling volume with distance from source
+            this.GetComponent<AudioSource>().volume = 1f;
+            
 			print ("[DangIt] [AlarmManager] Creating Clip");
-			this.audio.clip=GameDatabase.Instance.GetAudioClip("DangIt/Sounds/alarm"); //Load alarm sound
+            this.GetComponent<AudioSource>().clip = GameDatabase.Instance.GetAudioClip("DangIt/Sounds/alarm"); //Load alarm sound
 
 			print ("[DangIt] [AlarmManager] Creating Dictionary");
 			this.loops=new Dictionary<FailureModule, int>(); //Reset counter, so on logic pass we play it
@@ -28,12 +28,12 @@ namespace ippo
 		public void UpdateSettings(){
 			float scaledVolume = DangIt.Instance.CurrentSettings.AlarmVolume / 100f;
 			print ("[DangIt] [AlarmManager] Rescaling Volume (at UpdateSettings queue)..., now at " + scaledVolume);
-			this.audio.volume = scaledVolume;
+            this.GetComponent<AudioSource>().volume = scaledVolume;
 		}
 
 		public void AddAlarm(FailureModule fm, int number)
 		{
-			this.audio.volume = DangIt.Instance.CurrentSettings.GetMappedVolume(); //This seems like an OK place for this, because if I put it in the constructor...
+            this.GetComponent<AudioSource>().volume = DangIt.Instance.CurrentSettings.GetMappedVolume(); //This seems like an OK place for this, because if I put it in the constructor...
 			                                                                       // ...you would have to reboot to change it, but I don't want to add lag by adding it to each frame in Update()
 			if (number != 0) {
 				print ("[DangIt] [AlarmManager] Adding '" + number.ToString () + "' alarms from '" + fm.ToString () + "'");
@@ -45,13 +45,13 @@ namespace ippo
 
 		public void Update()
 		{
-			if (this.audio != null) {
-				if (!this.audio.isPlaying){
+			if (this.GetComponent<AudioSource>() != null) {
+				if (!this.GetComponent<AudioSource>().isPlaying){
 					if (loops.Count > 0) {
 						var element = loops.ElementAt (0);
 						loops.Remove (element.Key);
 						print ("[DangIt] [AlarmManager] Playing Clip");
-						audio.Play ();
+                        this.GetComponent<AudioSource>().Play();
 						if (element.Value != 0 && element.Value != 1) {
 							if (element.Key.vessel == FlightGlobals.ActiveVessel) {
 								loops.Add (element.Key, element.Value - 1); //Only re-add if still has alarms
